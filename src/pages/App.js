@@ -4,7 +4,7 @@ import gitLogo from '../assets/github.png'
 import Input from '../components/Input';
 import Button from '../components/Button';
 import ItemRepo from '../components/ItemRepo';
-import { api } from '../services/api';
+import {api} from '../services/api';
 
 import { Container } from './styles';
 
@@ -15,9 +15,8 @@ function App() {
 
 
   const handleSearchRepo = async () => {
-
     const {data} = await api.get(`repos/${currentRepo}`)
-
+    console.log('Data',data);
     if(data.id){
 
       const isExist = repos.find(repo => repo.id === data.id);
@@ -34,9 +33,8 @@ function App() {
   }
 
   const handleRemoveRepo = (id) => {
-    console.log('Removendo registro', id);
-
-    // utilizar filter.
+    const reposFilter = repos.filter(repo => repo.id !== id);
+    setRepos(reposFilter);
   }
 
 
